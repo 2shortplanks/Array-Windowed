@@ -166,7 +166,5 @@ L<Array::Window>, L<Data::Page>
 
 =cut
 
-=cut
-
 1;
 
