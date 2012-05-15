@@ -9,6 +9,8 @@ use List::Util qw(min max);
 
 our @EXPORT_OK;
 
+our $VERSION = "1.00";
+
 =head1 NAME
 
 Array::Windowed - return a windowed slice of the array
