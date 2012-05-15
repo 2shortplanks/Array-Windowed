@@ -94,8 +94,8 @@ sub array_windowed(\@$$) {
 	### $first_index
 	### $last_index
 
-	return [] unless $last_index >= 0;
-	return [] unless $first_index <= $last_index;
+	return [] if $last_index < 0;
+	return [] if $first_index > $last_index;
 	return [@{$array_ref}[$first_index..$last_index]];
 }
 push @EXPORT_OK, "array_windowed";
