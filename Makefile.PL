@@ -6,5 +6,6 @@ all_from       'lib/Array/Windowed.pm';
 license 'perl';
 githubmeta;
 author_tests('xt');
+readme_from 'lib/Array/Windowed.pm';
 
 WriteAll;

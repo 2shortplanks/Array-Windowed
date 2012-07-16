@@ -20,5 +20,10 @@ no_index:
     - t
     - xt
 resources:
+  homepage: https://github.com/2shortplanks/Array-Windowed/tree
   license: http://dev.perl.org/licenses/
+  repository:
+    type: git
+    url: git://github.com/2shortplanks/Array-Windowed.git
+    web: https://github.com/2shortplanks/Array-Windowed/tree
 version: 1.00

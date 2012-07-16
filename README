@@ -1,0 +1,106 @@
+NAME
+    Array::Windowed - return a windowed slice of the array
+
+SYNOPSIS
+       use Array::Windowed qw(windowed_array);
+
+       # from an array
+       my $new_array = array_window @old_array, $start_index, $count);
+
+       # from an arrayref
+       my $new_array2 = &array_window($array_ref, $start_index, $count);
+
+DESCRIPTION
+    Simple module to return a slice of the passed array as specified by a
+    start position and a number of elements. Unlike the built in slicing
+    functions this does not populate the returned array with "undef"s for
+    out of bounds operations, but simply returns a smaller array.
+
+FUNCTION
+    Exported on demand (or you can call it fully qualified)
+
+    array_windowed @old_array, $start_index, $count
+        Returns an array reference containing up to $count elements from the
+        @old_array starting at $start_index.
+
+        Unlike a traditional array slice elements outside the bounds of the
+        array are simply dropped. Negative indexes are treated as normal
+        indexes that occur before the 0th index (rather than indexes
+        counting backwards from the start of the array.)
+
+        This is probably best shown with a series of examples:
+
+                my @array = ['a'..'z'];
+
+                # ["a".."z"]
+                array_windowed(@array, 0, 26);
+
+                # ["a","b","c","d","e"]
+                array_windowed(@array, 0, 5);
+
+                # ["b","c","d","e","f"]
+                array_windowed(@array, 1, 5);
+
+                # []
+                array_windowed(@array, 26, 5);
+
+                # []
+                array_windowed(@array, -50, 5);
+
+                # ["x","y","z"]
+                array_windowed(@array, 23, 5);
+
+                # ["a","b","c"]
+                array_windowed(@array, -2, 5); 
+
+                # ["a".."z"]
+                &array_windowed(\@array, 0, 26);
+
+RATIONALLE
+    Why this module?
+
+    Why not simple array slices with @foo[ ... ]
+        Because the edge cases of indexes outside the bounds of the array
+        don't do the same thing (they return lots of "undef"s mainly)
+
+    Why not splice?
+        It's destructive on the original array.
+
+    Why not Array::Window
+        Because it tries too hard to DTRT, which isn't the RT for us. For
+        example, if you have a count bigger than the entire array then it
+        always returns the entire array irregardless of the start position.
+
+        This doesn't mean it's not the module for you, however.
+
+    Why not Data::Page
+        This concept of windowing we're using doesn't use pages, but rather
+        a start position and a count.
+
+        This doesn't mean it's not the module for you, however.
+
+AUTHOR
+    Written by Mark Fowler <mark@twoshortplanks.com>
+
+COPYRIGHT
+    Copyright Mark Fowler 2012. All Rights Reserved.
+
+    This program is free software; you can redistribute it and/or modify it
+    under the same terms as Perl itself.
+
+BUGS
+    This module does no sanity checking on the values that are passed into
+    it (i.e. it does not check that $start or $count are integer numbers,
+    nor does it check that the first argument is an array reference if you
+    disable prototyping.)
+
+    Bugs should be reported via this distribution's CPAN RT queue. This can
+    be found at <https://rt.cpan.org/Dist/Display.html?Array-Windowed>
+
+    You can also address issues by forking this distribution on github and
+    sending pull requests. It can be found at
+    <http://github.com/2shortplanks/Array-Windowed>
+
+SEE ALSO
+    Array::Window, Data::Page
+
